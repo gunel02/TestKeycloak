@@ -37,11 +37,12 @@ object KtorClient {
         }
 
         defaultRequest {
-            val token = EncryptedTokenStorage.getAccessToken()
-            if(!token.isNullOrEmpty()){
-                header("Authorization","Bearer $token")
+            runCatching {
+                EncryptedTokenStorage.getAccessToken()
+            }.getOrNull()?.let{token ->
+                if(token.isNotEmpty()) header("Authorization","Bearer $token")
+            }
             }
         }
     }
 
-}

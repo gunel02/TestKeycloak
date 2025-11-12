@@ -8,3 +8,4 @@ interface TokenRepository {
     fun getRefreshToken(): String?
     fun clearTokens()
 }
+

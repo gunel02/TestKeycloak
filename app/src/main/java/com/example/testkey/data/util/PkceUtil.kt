@@ -19,3 +19,4 @@ object PkceUtil {
         return Base64.encodeToString(digest, Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
     }
 }
+

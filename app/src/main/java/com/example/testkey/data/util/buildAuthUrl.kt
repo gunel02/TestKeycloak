@@ -22,3 +22,4 @@ fun buildAuthUrl(
         .appendQueryParameter("code_challenge_method","S256")
         .build()
 }
+

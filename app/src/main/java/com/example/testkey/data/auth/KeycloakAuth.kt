@@ -11,11 +11,11 @@ object KeycloakAuth {
 
     suspend fun exchangeCodeForTokens(code: String,codeVerifier: String): TokenResponse{
         return client.submitForm(
-            url = "http://10.0.2.2:8080/realms/myrealm/protocol/openid-connect/token",
+            url = "https://172.18.0.1:8443/realms/myrealm/protocol/openid-connect/token",
             formParameters = Parameters.build {
                 append("grant_type","authorization_code")
                 append("code",code)
-                append("redirect_uri","com.example.testkey:/oauth2redirect")
+                append("redirect_uri","myapp://callback")
                 append("client_id","my-android-app")
                 append("code_verifier",codeVerifier)
             }
