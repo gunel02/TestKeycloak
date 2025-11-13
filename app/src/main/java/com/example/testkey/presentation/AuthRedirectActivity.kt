@@ -27,7 +27,7 @@ class AuthRedirectActivity : AppCompatActivity() {
 
         binding = ActivityAuthRedirectBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.d("AuthRedirect", "onCreate")
         val uri = intent?.data
         if(uri != null && uri.toString().startsWith(NetworkRoutes.REDIRECT_URI)){
            val code = uri.getQueryParameter("code")
@@ -46,22 +46,18 @@ class AuthRedirectActivity : AppCompatActivity() {
                             code,
                             codeVerifier = codeVerifier
                         )
+
+                        Log.d("AuthRedirect redirect", "Received code=$tokens")
+
+                        //change here
                         EncryptedTokenStorage.saveToken(tokens)
+
                         TemporaryStorage.codeVerifier = null
                         TemporaryStorage.state = null
 
-                        withContext(Dispatchers.Main){
 
-                            startActivity(Intent(this@AuthRedirectActivity, MainActivity::class.java))
-                            finish()
-                        }
                     }catch (e:Exception){
-                        e.printStackTrace()
-                        withContext(Dispatchers.Main){
-                            Toast.makeText(this@AuthRedirectActivity,"Login failed", Toast.LENGTH_SHORT).show()
-                            Log.e("AuthRedirect", "Login failed: ${e.message}")
-                            finish()
-                        }
+                        Log.e("AuthRedirect redirect", "Error: $e" )
                     }
                 }
             }else{

@@ -2,6 +2,7 @@ package com.example.testkey.data.auth
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.os.SystemTraceRequestBuilder
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
@@ -22,7 +23,10 @@ object EncryptedTokenStorage: TokenRepository {
         )
     }
 
+    //here
     override fun saveToken(token: TokenResponse) {
+        Log.d("Token", "Saved token: ${token.expires_in}")
+
         prefs.edit()
             .putString("access_token",token.access_token)
             .putString("refresh_token",token.refresh_token)

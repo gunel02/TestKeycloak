@@ -10,7 +10,7 @@ import io.ktor.http.Parameters
 object KeycloakAuth {
     private val client = KtorClient.client
 
-    suspend fun exchangeCodeForTokens(code: String,codeVerifier: String): TokenResponse{
+    suspend fun exchangeCodeForTokens(code: String,codeVerifier: String): TokenResponse {
         return client.submitForm(
             url = NetworkRoutes.KEYCLOAK_URL,
             formParameters = Parameters.build {
