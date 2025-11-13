@@ -3,6 +3,7 @@ package com.example.testkey.data.auth
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.example.testkey.data.network.NetworkRoutes
 import com.example.testkey.data.util.TemporaryStorage
 import com.example.testkey.data.util.PkceUtil
 import com.example.testkey.data.util.buildAuthUrl
@@ -18,9 +19,9 @@ object AuthManager {
         TemporaryStorage.state = state
 
         val authUrl = buildAuthUrl(
-            issuer = "http://10.0.2.2:8080/realms/myrealm",
-            clientId = "my-android-app",
-            redirectUri = "myapp://callback",
+            issuer = NetworkRoutes.ISSUER,
+            clientId = NetworkRoutes.CLIENT_ID,
+            redirectUri = NetworkRoutes.REDIRECT_URI,
             codeChallenge = codeChallenge,
             state = state
         )

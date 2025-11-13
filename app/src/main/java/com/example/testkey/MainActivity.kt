@@ -1,6 +1,7 @@
 package com.example.testkey
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val token = EncryptedTokenStorage.getAccessToken()
+        Log.e("AuthRedirect", "Invalid redirect URI")
         if(token.isNullOrEmpty()){
             AuthManager.startKeycloakLogin(this)
         }

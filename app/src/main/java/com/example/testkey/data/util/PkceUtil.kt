@@ -10,7 +10,7 @@ object PkceUtil {
     fun generateCodeVerifier(): String{
         val random = ByteArray(32)
         SecureRandom().nextBytes(random)
-        return Base64.encodeToString(random,Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING).take(128)
+        return Base64.encodeToString(random,Base64.URL_SAFE or Base64.NO_WRAP or Base64.NO_PADDING)
     }
 
     fun codeChallengeFromVerifier(verifier: String): String{

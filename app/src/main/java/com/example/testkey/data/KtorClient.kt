@@ -1,7 +1,6 @@
 package com.example.testkey.data
 
 import android.util.Log
-import androidx.security.crypto.EncryptedSharedPreferences
 import com.example.testkey.data.auth.EncryptedTokenStorage
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -39,10 +38,10 @@ object KtorClient {
         defaultRequest {
             runCatching {
                 EncryptedTokenStorage.getAccessToken()
-            }.getOrNull()?.let{token ->
-                if(token.isNotEmpty()) header("Authorization","Bearer $token")
-            }
+            }.getOrNull()?.takeIf { it.isNotEmpty() }?.let { token ->
+                header("Authorization", "Bearer $token")
             }
         }
     }
+}
 
